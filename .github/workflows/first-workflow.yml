@@ -9,7 +9,18 @@ env:
   GOODBYE_MESSAGE: "Goodbye, World!"
 
 jobs:
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Run YAML Lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+
   say-hello:
+    needs: lint-yaml
     runs-on: ubuntu-latest
     steps:
       - name: Get repository name and date
@@ -30,4 +41,5 @@ jobs:
           echo "CURRENT_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
       - name: Print ${GOODBYE_MESSAGE} with repo and date
         run: echo "${GOODBYE_MESSAGE} from ${{ env.REPO_NAME }} at ${{ env.CURRENT_DATE }}"
+
 
