@@ -9,6 +9,14 @@ jobs:
     steps:
       - name: Print Hello World
         run: echo "Hello, World!"
-      - name: Print Goodbye World      # Add this
-        run: echo "Goodbye, World!"    # Add this
+
+
+  say-goodbye:
+    needs: say-hello
+    runs-on: ubuntu-latest
+    if: github.status_code == '0'
+    steps:
+      - name: Print Goodbye World
+        run: echo "Goodbye, World!"
+
 
