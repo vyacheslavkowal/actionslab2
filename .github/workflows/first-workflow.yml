@@ -9,4 +9,6 @@ jobs:
     steps:
       - name: Print Hello World
         run: echo "Hello, World!"
+      - name: Print Goodbye World      # Add this
+        run: echo "Goodbye, World!"    # Add this
 
